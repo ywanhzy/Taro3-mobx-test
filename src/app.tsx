@@ -4,18 +4,19 @@ import React, { Component } from 'react'
 import { Provider } from 'mobx-react'
 import * as store from './store/index'
 // import counterStore from './store/counter'
+// import appStore from './store/app'
 
 import './app.scss'
 
 // const store = {
-//   counterStore
+//   appStore
 // }
 
 class App extends Component {
   componentDidMount () {
     const info = Taro.getSystemInfoSync();
     // console.log('SystemInfoModel', info)
-    store.app.setSystemInfo(info)
+    store.appStore.setSystemInfo(info)
   }
 
   componentDidShow () {}

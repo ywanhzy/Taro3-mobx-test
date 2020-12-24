@@ -19,12 +19,13 @@ import './index.scss'
 //   props: PageStateProps;
 // }
 
-@inject('app')
+@inject('store')
 @observer
 class Index extends Component {
   componentWillMount () {
-    const { systemInfo } = this.props.app
-    console.log(systemInfo)
+    console.log(this.props)
+    const { appStore } = this.props.store
+    console.log(appStore.systemInfo)
   }
 
   componentDidMount () { }
@@ -51,13 +52,13 @@ class Index extends Component {
   }
 
   render () {
-    const { systemInfo } = this.props.app
+    const { appStore } = this.props.store
     return (
       <View className='index'>
         <Button onClick={this.increment}>+</Button>
         <Button onClick={this.decrement}>-</Button>
         <Button onClick={this.incrementAsync}>Add Async</Button>
-        <Text>{'counter'}</Text>
+        <Text>{'counter'}{JSON.stringify(appStore.systemInfo)}</Text>
       </View>
     )
   }

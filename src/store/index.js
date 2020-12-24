@@ -1,4 +1,4 @@
-import app from './app'
+import appStore from './app'
 
 
-export {app}
+export { appStore }
