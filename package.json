@@ -42,6 +42,8 @@
     "mobx-react": "^6.1.4",
     "react-dom": "^16.10.0",
     "@tarojs/react": "3.0.21",
+    "@babel/register": "7.12.10",
+    "babel-plugin-preval": "^5.0.0",
     "react": "^16.10.0"
   },
   "devDependencies": {

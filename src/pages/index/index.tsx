@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Button, Text } from '@tarojs/components'
 import { observer, inject } from 'mobx-react'
-
+import withShare from '../../utils/withShare';
 import './index.scss'
 
 // type PageStateProps = {
@@ -18,6 +18,12 @@ import './index.scss'
 // interface Index {
 //   props: PageStateProps;
 // }
+
+@withShare({
+  title: '好友邀您一起来美食流享受美食',
+  imageUrl: 'https://res.cyoow.cn/image_yqxtV2.png',
+  path: '/pages/index/index'
+})
 
 @inject('store')
 @observer
