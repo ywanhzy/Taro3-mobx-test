@@ -25,12 +25,26 @@ import './index.scss'
   path: '/pages/index/index'
 })
 
-@inject('store')
+@inject('appStore')
 @observer
 class Index extends Component {
+  onShareAppMessage (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '自定义转发标题',
+      path: '/page/user?id=123'
+    }
+  }
+  onShareTimeline () {
+    console.log('onShareTimeline')
+    return {}
+  }
   componentWillMount () {
-    console.log(this.props)
-    const { appStore } = this.props.store
+    console.log(this.props.appStore)
+    const { appStore } = this.props
     console.log(appStore.systemInfo)
   }
 
@@ -58,7 +72,7 @@ class Index extends Component {
   }
 
   render () {
-    const { appStore } = this.props.store
+    const { appStore } = this.props
     return (
       <View className='index'>
         <Button onClick={this.increment}>+</Button>

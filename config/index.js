@@ -1,3 +1,7 @@
+
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const TerserPlugin = require("terser-webpack-plugin");
+
 const config = {
   projectName: 'taro3-mobx-demo',
   date: '2020-12-17',
@@ -18,8 +22,61 @@ const config = {
     options: {
     }
   },
+  terser: {
+    enable: true,
+    config: {
+      // 配置项同 https://github.com/terser/terser#minify-options
+    }
+  },
   framework: 'react',
   mini: {
+    webpackChain(chain, webpack) {
+
+      // chain.plugin('analyzer')
+      //   .use(BundleAnalyzerPlugin, [{
+      //     analyzerMode: "server",
+      //     analyzerHost: "127.0.0.1",
+      //     analyzerPort: 8881, // 运行后的端口号
+      //     reportFilename: "report.html",
+      //     defaultSizes: "parsed",
+      //     openAnalyzer: true,
+      //     generateStatsFile: false,
+      //     statsFilename: "stats.json",
+      //     statsOptions: null,
+      //     logLevel: "info"
+      //   }]);
+
+      chain.mode("production");
+      chain.optimization.minimize(true); //压缩
+      chain.plugin("terser").use(TerserPlugin, [
+        {
+          extractComments: false, //禁用提取注释
+          terserOptions: {
+            output: {
+              comments: false,   //去掉注释
+            },
+            warnings: false,
+            // compress: {
+            //   drop_console: true, 
+            //   drop_debugger: false,
+            //   pure_funcs: ['console.log'] 
+            // },
+          }
+        }
+      ]);
+      // chain.merge({
+      //   plugin: {
+      //     install: {
+      //       plugin: require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+      //       args: [{
+      //         analyzerMode: 'static',
+      //         defaultSizes: 'gzip',
+      //         analyzerPort: 8880
+      //       }]
+      //     }
+      //   }
+      // })
+    },
     postcss: {
       pxtransform: {
         enable: true,

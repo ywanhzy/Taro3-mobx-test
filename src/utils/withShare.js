@@ -9,11 +9,13 @@ function withShare(opts = {}) {
   const defalutPath = 'pages/index/index?1=1';
   const defalutTitle = '默认标题';
   const defaultImageUrl = null;
-  return function demoComponent() {
-
+  return function demoComponent(WrappedComponent) {
+    @inject('appStore')
+    @observer
     class WithShare extends Component {
       async componentWillMount() {
-
+        const { appStore } = this.props;
+        console.log('hoc---',appStore)
         if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
           Taro.showShareMenu({
             withShareTicket: true
@@ -27,8 +29,8 @@ function withShare(opts = {}) {
 
       // 点击分享的那一刻会进行调用
       onShareAppMessage() {
-        // const { userInfo } = this.props;
-
+        const { appStore } = this.props;
+        console.log('hoc---',appStore)
         let { title, imageUrl, path = null } = opts;
 
         // 从继承的组件获取配置
@@ -99,10 +101,12 @@ function withShare(opts = {}) {
           imageUrl: imageUrl || defaultImageUrl
         };
       }
-
       render() {
-        return super.render();
+        return <WrappedComponent />
       }
+      // render() {
+      //   return super.render();
+      // }
     }
 
     return WithShare;

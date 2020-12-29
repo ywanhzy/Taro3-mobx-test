@@ -61,6 +61,8 @@
     "stylelint": "9.3.0",
     "@typescript-eslint/parser": "^2.x",
     "@typescript-eslint/eslint-plugin": "^2.x",
+    "terser-webpack-plugin": "^4.2.0",
+    "webpack-bundle-analyzer": "^4.3.0",
     "typescript": "^3.7.0"
   }
 }
